@@ -1,5 +1,6 @@
 import UpperBorder from "../Micro/UpperBorder.jsx"
 import ProductCard from "../Main/ProductCard.jsx"
+import AiImage from "../../assets/Gemini_Generated_Image_fapaylfapaylfapa.png"
 
 const NewArrivalsSection = () => {
 
@@ -7,7 +8,7 @@ const productsData = [{
   name: 'Monochrome Dream',
   price: 'Rs 129.99',
   images: [
-    'https://placehold.co/600x600/1a202c/ffffff?text=Image+1',
+    AiImage,
     'https://placehold.co/600x600/2d3748/ffffff?text=Image+2',
     'https://placehold.co/600x600/4a5568/ffffff?text=Image+3',
     'https://placehold.co/600x600/718096/ffffff?text=Image+4',
