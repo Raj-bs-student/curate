@@ -1,2 +1,11 @@
+
 @import "tailwindcss";
+
+@theme {
+  --color-primary: oklch(0.6 0.118 184.704);
+}
+
+:root{
+  background-color: #18181B; /* Tailwind's gray-900 */
+}
 

@@ -1,5 +1,7 @@
 import Header from '../Main/Header.jsx';
 import BackgroundVideoSection from '../Micro/BackgroundVideoSection.jsx';
+import InfoSection from '../Micro/InfoSection.jsx';
+import NewArrivalsSection from '../Main/NewArrivalsSection.jsx';
 
 const MainScreen = () => {
   return (
@@ -7,6 +9,7 @@ const MainScreen = () => {
       <Header />
       <BackgroundVideoSection />
       <InfoSection />
+      <NewArrivalsSection/>
     </div>
   )
 }

@@ -8,6 +8,8 @@ const BackgroundVideoSection = () => {
     height: '50vh',
 
   }
+
+  // todo: add overlay to the entire section
   return (
     <div className="relative w-screen h-screen overflow-hidden">
     <div className="absolute top-1/2 left-1/2 w-[80vw] h-[80vh] transform -translate-x-1/2 -translate-y-1/2 overflow-hidden">

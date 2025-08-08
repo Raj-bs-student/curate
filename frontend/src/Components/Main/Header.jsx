@@ -4,7 +4,7 @@ import  ButtonMinimalist  from '../Micro/ButtonMinimalist.jsx';
 
 const Header = () => {
   return (
-    <div className='flex align-center p-4 h-[15%] place-content-between'>
+    <div className='fixed top-0 left-0 w-full z-50 flex align-center px-20 py-8 h-[15vw] place-content-between'>
       <div className='flex justify-self-start gap-2 align-center'  >
         <ButtonMinimalist title='Shop' />
         <ButtonMinimalist title='About' />
