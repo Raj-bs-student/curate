@@ -3,7 +3,7 @@
 const ButtonMinimalist = (props) => {
   return (
     
-    <button type="button" className="hover:bg-zinc-800 h-[2em] px-3 rounded text-white border-[1px] border-[rgba(255,255,255,0.1)]">{props.title || "Click me" }</button>
+    <button type="button" className="hover:bg-zinc-800 h-[2em] px-3 rounded text-white border-[1px] border-[rgba(255,255,255,0.1)] backdrop-blur-3xl ">{props.title || "Click me" }</button>
     
   )
 }

@@ -11,7 +11,7 @@ const BackgroundVideoSection = () => {
 
   // todo: add overlay to the entire section
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
+    <div className="relative mt-[10vh] w-screen h-screen overflow-hidden">
     <div className="absolute top-1/2 left-1/2 w-[80vw] h-[80vh] transform -translate-x-1/2 -translate-y-1/2 overflow-hidden">
 {/* First video - normal */}
 <video src={VideoSrc} autoPlay loop muted className="absolute top-0 left-0 w-full h-[60%] object-cover" />

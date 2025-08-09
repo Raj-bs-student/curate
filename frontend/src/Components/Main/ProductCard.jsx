@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../../features/cart/cartSlice.jsx'
 
 // --- Helper: Icon for the button ---
 const PlusIcon = () => (
@@ -23,6 +24,15 @@ const PlusIcon = () => (
 
 // --- The Main Product Card Component ---
 const ProductCard = ({ product }) => {
+
+  const dispatch = useDispatch();
+
+  const handleQuickAdd = () => {
+    dispatch(addItemToCart(product));
+  }
+ 
+
+
   const { name, price, images } = product;
   const imageCount = images.length;
 
@@ -90,7 +100,7 @@ const ProductCard = ({ product }) => {
       </div>
 
       {/* Image Gallery and Quick Add Button */}
-      <div className="relative aspect-square mt-2">
+      <div className="relative aspect-square mt-2" onClick={handleQuickAdd}>
         {/* This container holds the images and clips them. */}
         <div className="w-full h-full overflow-hidden">
           {/* This inner div acts as a "film strip" that moves vertically. */}
@@ -133,12 +143,5 @@ const ProductCard = ({ product }) => {
 
 
 // --- Main App Component ---
-// This component renders the ProductCard in a centered layout.
+
 export default ProductCard;
-// export default function App() {
-//   return (
-//     <div className="flex px-20 py-10">
-//       <ProductCard product={productData} />
-//     </div>
-//   );
-// }
