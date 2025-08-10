@@ -21,19 +21,36 @@ const PlusIcon = () => (
   </svg>
 );
 
-
 // --- The Main Product Card Component ---
 const ProductCard = ({ product }) => {
-
   const dispatch = useDispatch();
 
   const handleQuickAdd = () => {
-    dispatch(addItemToCart(product));
-  }
- 
+    if (product.countInStock > 0) {
+      dispatch(addItemToCart(product));
+    }
+  };
 
+  // Extract product data with fallbacks for backend structure
+  const { 
+    name, 
+    price, 
+    image, 
+    countInStock = 0,
+    rating = 0,
+    numReviews = 0 
+  } = product;
 
-  const { name, price, images } = product;
+  // Create images array - use single image from backend or fallback images
+  const images = image ? [
+    image,
+    'https://placehold.co/600x600/2d3748/ffffff?text=View+2',
+    'https://placehold.co/600x600/4a5568/ffffff?text=View+3',
+    'https://placehold.co/600x600/718096/ffffff?text=View+4',
+  ] : [
+    'https://placehold.co/600x600/1a202c/ffffff?text=No+Image',
+  ];
+
   const imageCount = images.length;
 
   // Total time in milliseconds for one full cycle through all images.
@@ -100,7 +117,7 @@ const ProductCard = ({ product }) => {
       </div>
 
       {/* Image Gallery and Quick Add Button */}
-      <div className="relative aspect-square mt-2" onClick={handleQuickAdd}>
+      <div className="relative aspect-square mt-2">
         {/* This container holds the images and clips them. */}
         <div className="w-full h-full overflow-hidden">
           {/* This inner div acts as a "film strip" that moves vertically. */}
@@ -115,7 +132,10 @@ const ProductCard = ({ product }) => {
                 alt={`${name} - view ${index + 1}`}
                 className="w-full h-full object-cover"
                 // Handle image loading errors with a fallback
-                onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x600/1a202c/ff0000?text=Error'; }}
+                onError={(e) => { 
+                  e.target.onerror = null; 
+                  e.target.src = 'https://placehold.co/600x600/1a202c/ff0000?text=Error'; 
+                }}
               />
             ))}
           </div>
@@ -123,18 +143,48 @@ const ProductCard = ({ product }) => {
 
         {/* Quick Add Button */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-auto">
-          <button className="flex items-center justify-center px-6 py-3 bg-zinc-900 bg-opacity-50 backdrop-blur-sm text-white rounded-full text-sm font-semibold hover:bg-opacity-70 transition-all duration-300 shadow-lg">
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              handleQuickAdd();
+            }}
+            disabled={countInStock === 0}
+            className={`flex items-center justify-center px-6 py-3 bg-zinc-900 bg-opacity-50 backdrop-blur-sm text-white rounded-full text-sm font-semibold transition-all duration-300 shadow-lg ${
+              countInStock === 0 
+                ? 'opacity-50 cursor-not-allowed' 
+                : 'hover:bg-opacity-70 cursor-pointer'
+            }`}
+          >
             <PlusIcon />
-            Quick Add
+            {countInStock === 0 ? 'Out of Stock' : 'Quick Add'}
           </button>
         </div>
       </div>
 
       {/* Product Information */}
       <div className="p-6 pt-4">
-        <div className="flex justify-between items-center">
-          <h3 className="text-xl font-bold text-gray-100">{name}</h3>
-          <p className="text-lg font-medium text-gray-300">{price}</p>
+        <div className="flex justify-between items-start">
+          <div className="flex-1">
+            <h3 className="text-xl font-bold text-gray-100 mb-1">{name}</h3>
+            {rating > 0 && (
+              <div className="flex items-center mb-2">
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className={i < Math.floor(rating) ? 'text-yellow-400' : 'text-gray-600'}>
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <span className="text-gray-400 text-sm ml-2">
+                  ({numReviews} {numReviews === 1 ? 'review' : 'reviews'})
+                </span>
+              </div>
+            )}
+            <p className="text-sm text-gray-400">
+              {countInStock > 0 ? `${countInStock} in stock` : 'Out of stock'}
+            </p>
+          </div>
+          <p className="text-lg font-medium text-gray-300">₹{price}</p>
         </div>
       </div>
     </div>
