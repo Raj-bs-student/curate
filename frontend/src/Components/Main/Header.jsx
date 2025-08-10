@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ButtonMinimalist from "../Micro/ButtonMinimalist.jsx";
 import AuthModal from "../Auth/AuthModal.jsx";
+import CartModal from "../Cart/CartModal.jsx";
 import { logout } from "../../features/auth/authSlice.jsx";
 
 const Header = () => {
@@ -10,6 +11,7 @@ const Header = () => {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
 
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showCartModal, setShowCartModal] = useState(false);
   const [authMode, setAuthMode] = useState("login");
 
   const handleAuthClick = (mode) => {
@@ -33,8 +35,10 @@ const Header = () => {
         <div className="flex gap-2 items-center">
           {isAuthenticated ? (
             <>
-              
-              <ButtonMinimalist title={`Bag/${totalQuantity}`} />
+              <ButtonMinimalist 
+                title={`Bag/${totalQuantity}`} 
+                onClick={() => setShowCartModal(true)}
+              />
               <ButtonMinimalist title="Logout" onClick={handleLogout} />
             </>
           ) : (
@@ -48,7 +52,10 @@ const Header = () => {
                 onClick={() => handleAuthClick("register")}
               />
 
-              <ButtonMinimalist title={`Bag/${totalQuantity}`} />
+              <ButtonMinimalist 
+                title={`Bag/${totalQuantity}`} 
+                onClick={() => setShowCartModal(true)}
+              />
             </>
           )}
         </div>
@@ -58,6 +65,11 @@ const Header = () => {
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
         mode={authMode}
+      />
+      
+      <CartModal
+        isOpen={showCartModal}
+        onClose={() => setShowCartModal(false)}
       />
     </>
   );
