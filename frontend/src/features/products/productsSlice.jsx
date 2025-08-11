@@ -93,9 +93,15 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = action.payload.products;
+        // If it's the first page, replace the products. Otherwise, append them.
+        if (action.payload.page === 1) {
+          state.products = action.payload.products;
+        } else {
+          state.products = [...state.products, ...action.payload.products];
+        }
         state.page = action.payload.page;
         state.pages = action.payload.pages;
+        state.hasMore = action.payload.page < action.payload.pages;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
