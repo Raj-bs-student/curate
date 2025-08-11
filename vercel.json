@@ -7,9 +7,12 @@
       "config": { "includeFiles": ["backend/**"] }
     },
     {
-      "src": "frontend/package.json",
+      "src": "frontend",
       "use": "@vercel/static-build",
-      "config": { "distDir": "frontend/dist" }
+      "config": {
+        "buildCommand": "npm run build",
+        "distDir": "dist"
+      }
     }
   ],
   "rewrites": [
