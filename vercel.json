@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "npm install && npm run build:frontend",
   "builds": [
     {
       "src": "backend/api/index.js",
