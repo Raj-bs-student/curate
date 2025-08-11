@@ -4,13 +4,13 @@
     {
       "src": "backend/api/index.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["backend/**"] }
+      "config": { "includeFiles": ["backend/**"], "buildCommand": "npm install" }
     },
     {
       "src": "frontend",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "npm run build",
+        "buildCommand": "npm install && npm run build",
         "distDir": "dist"
       }
     }
