@@ -6,7 +6,7 @@
     {
       "src": "backend/api/index.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["backend/**"] }
+      "config": { "includeFiles": ["backend/**"], "buildCommand": "npm install" }
     },
     {
       "src": "frontend/package.json",
