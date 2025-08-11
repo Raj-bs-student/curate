@@ -4,8 +4,7 @@
     {
       "src": "backend/api/index.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["backend/**"] },
-      "installCommand": "npm install"
+      "config": { "includeFiles": ["backend/**"] }
     },
     {
       "src": "frontend/package.json",
