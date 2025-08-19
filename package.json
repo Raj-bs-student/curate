@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "cd backend && npm run start",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:frontend\"",
+    "dev:api": "node api/index.js",
     "dev:frontend": "cd frontend && npm run dev",
     "build": "cd frontend && npm install && npm run build",
-    "build:frontend": "cd frontend && npm install && npm run build",
-    "build:backend": "cd backend && npm install",
-    "start": "cd backend && npm start",
-    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
-    "postinstall": "cd backend && npm install"
+    "build:frontend": "cd frontend && npm run build",
+    "start": "node api/index.js",
+    "install:all": "npm install && cd frontend && npm install && cd ../api && npm install"
   },
   "devDependencies": {
     "concurrently": "^8.2.0"
